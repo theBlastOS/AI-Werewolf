@@ -23,8 +23,11 @@ import type {
 // 解析命令行参数
 const args = process.argv.slice(2);
 const configArg = args.find(arg => arg.startsWith('--config='));
-const configPath = configArg ? configArg.split('=')[1] : undefined;
+let configPath = configArg ? configArg.split('=')[1] : undefined;
 
+if(!configPath){
+  configPath = "configs/default.json"
+}
 // 加载配置
 const configLoader = new ConfigLoader(configPath);
 const config = configLoader.getConfig();
